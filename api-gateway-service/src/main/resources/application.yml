@@ -1,0 +1,37 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: api-gateway
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: customer-service
+#          uri: lb://customer-service
+#          predicates:
+#            - Path=/customer/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: customerCircuitBreaker
+#                fallbackUri: forward:/defaultFallback
+#
+#        - id: product-service
+#          uri: lb://product-service
+#          predicates:
+#            - Path=/product/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: productCircuitBreaker
+#                fallbackUri: forward:/defaultFallback
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+

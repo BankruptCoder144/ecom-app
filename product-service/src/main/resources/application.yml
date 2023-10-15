@@ -1,0 +1,26 @@
+server:
+  port: 9004
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecomapp
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  application:
+    name: product-service
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
