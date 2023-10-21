@@ -9,8 +9,8 @@ import java.util.List;
 public class ProductDto {
 
     @JsonIgnore
+    private int id;
     private String name;
-    private String description;
     private List<Integer> categoryIds;
     private float price;
     private int availableCount;

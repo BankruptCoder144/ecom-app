@@ -39,7 +39,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(authorizeRequest -> {
-                    authorizeRequest.requestMatchers("/user/register","/user/token","/user/validate").permitAll();
+                    authorizeRequest.requestMatchers("/user/register","/user/token","/user/validate","/user/admin/register","/user/data").permitAll();
                 })
                 .cors(cors -> {
                     cors.disable();

@@ -1,5 +1,6 @@
 package com.example.userservice.service;
 
+import com.example.userservice.config.CustomUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -24,9 +25,15 @@ public class AuthTokenService {
         Jwts.parser().setSigningKey(getKey()).build().parseSignedClaims(token);
     }
 
-    public String generateToken(String username) {
+    public Map<String, Object> getData(final String token) {
+        return Jwts.parser().setSigningKey(getKey()).build().parseSignedClaims(token).getPayload();
+    }
+
+    public String generateToken(CustomUserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, username);
+        claims.put("id", userDetails.getId());
+        claims.put("role", userDetails.getRole());
+        return createToken(claims, userDetails.getUsername());
     }
 
     private String createToken(Map<String, Object> claims, String username) {

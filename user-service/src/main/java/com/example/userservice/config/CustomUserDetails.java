@@ -1,21 +1,27 @@
 package com.example.userservice.config;
 
 import com.example.userservice.entities.UserEntity;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class CustomeUserDetails implements UserDetails {
+
+@Data
+public class CustomUserDetails implements UserDetails {
 
     private String username;
     private String password;
+    private String role;
 
-    public CustomeUserDetails(UserEntity userEntity) {
+    private int id;
+
+    public CustomUserDetails(UserEntity userEntity) {
         this.username = userEntity.getUsername();
         this.password = userEntity.getPassword();
+        this.id = userEntity.getId();
+        this.role = userEntity.getRole();
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

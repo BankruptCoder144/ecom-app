@@ -5,9 +5,11 @@ import com.example.productservice.entity.CategoryDetails;
 import com.example.productservice.entity.ProductDetails;
 import com.example.productservice.repo.CategoryRepository;
 import com.example.productservice.repo.ProductRepository;
+import com.example.productservice.util.ProductUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +23,7 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public ProductDetails addProduct(ProductDto productDto) {
+    public ProductDto addProduct(ProductDto productDto) {
         List<CategoryDetails> categoryDetailsList = new ArrayList<>();
         productDto.getCategoryIds().forEach(categoryId ->{
             Optional<CategoryDetails> categoryDetails = categoryRepository.findById(categoryId);
@@ -35,15 +37,18 @@ public class ProductService {
         productDetails.setAvailableCount(productDto.getAvailableCount());
         productDetails.setProductCategories(categoryDetailsList);
         productRepository.save(productDetails);
-        return productDetails;
+        productDto.setId(productDetails.getId());
+        return productDto;
     }
 
-    public List<ProductDetails> getAllProducts() {
-        return productRepository.findAll();
+    public List<ProductDto> getAllProducts() {
+        return ProductUtil.productDetailsListToDtos(productRepository.findAll());
     }
 
-    public Optional<ProductDetails> getProductdetails(int pid) {
-        return productRepository.findById(pid);
+    public ProductDto getProductdetails(int pid) {
+         Optional<ProductDetails> productDetails = productRepository.findById(pid);
+         return productDetails.map(ProductUtil::productDetailsToProductDto)
+                 .orElseThrow(() -> new RuntimeException("Product Id not found"));
     }
 
 }

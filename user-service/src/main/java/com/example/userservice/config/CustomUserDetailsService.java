@@ -1,8 +1,10 @@
 package com.example.userservice.config;
 
 import com.example.userservice.entities.UserEntity;
+import com.example.userservice.exceptions.AppException;
 import com.example.userservice.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,6 +21,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<UserEntity> userEntity = userRepository.findByUsername(username);
-        return userEntity.map(CustomeUserDetails::new).orElseThrow(() -> new RuntimeException("USername not valid"));
+        return userEntity.map(CustomUserDetails::new).orElseThrow(() -> new UsernameNotFoundException("Username not valid"));
     }
 }
