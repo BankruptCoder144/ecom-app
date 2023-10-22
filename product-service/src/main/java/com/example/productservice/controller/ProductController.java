@@ -4,9 +4,11 @@ import com.example.productservice.dto.CategoryDto;
 import com.example.productservice.dto.ProductDto;
 import com.example.productservice.entity.CategoryDetails;
 import com.example.productservice.entity.ProductDetails;
+import com.example.productservice.exceptions.AppException;
 import com.example.productservice.service.CategoryService;
 import com.example.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,9 +46,16 @@ public class ProductController {
         return productService.addProduct(productDto);
     }
 
-    @PutMapping("/{count}")
-    public void setAvailableCount(@PathVariable("count") int count) {
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateProduct(@PathVariable("id") int id, @RequestBody ProductDto productDto) throws AppException {
+        productService.updateProduct(id, productDto);
+        return ResponseEntity.ok("Product Updated/Created");
+    }
 
+    @PutMapping("/order")
+    public ResponseEntity<String> orderProduct(@RequestParam("pid") int pid, @RequestParam("count") int count) throws AppException {
+        productService.orderProduct(pid, count);
+        return ResponseEntity.ok("Order successfully created for pid : " + pid);
     }
 
     @GetMapping("/")

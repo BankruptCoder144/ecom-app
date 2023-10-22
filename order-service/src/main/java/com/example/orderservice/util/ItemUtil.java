@@ -22,6 +22,9 @@ public class ItemUtil {
         ItemDto itemDto = new ItemDto();
         itemDto.setCount(item.getCount());
         itemDto.setProductId(item.getProductId());
+        itemDto.setId(item.getId());
+        itemDto.setStatus(item.getStatus());
+        itemDto.setOrderId(item.getOrder().getId());
         return itemDto;
     }
 

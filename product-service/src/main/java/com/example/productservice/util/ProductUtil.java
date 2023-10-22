@@ -23,4 +23,5 @@ public class ProductUtil {
     public static List<ProductDto> productDetailsListToDtos(List<ProductDetails> productDetails) {
         return productDetails.stream().map(ProductUtil::productDetailsToProductDto).collect(Collectors.toList());
     }
+
 }

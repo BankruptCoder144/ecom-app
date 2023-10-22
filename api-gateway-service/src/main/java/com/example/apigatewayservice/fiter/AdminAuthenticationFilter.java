@@ -8,7 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AdminAuthenticationFilter extends AbstractGatewayFilterFactory<AdminAuthenticationFilter> {
+public class AdminAuthenticationFilter extends AbstractGatewayFilterFactory<AdminAuthenticationFilter.Config> {
 
     @Autowired
     private RouteValidator routeValidator;
@@ -16,7 +16,7 @@ public class AdminAuthenticationFilter extends AbstractGatewayFilterFactory<Admi
     @Autowired
     private TokenUtil tokenUtil;
     @Override
-    public GatewayFilter apply(AdminAuthenticationFilter config) {
+    public GatewayFilter apply(Config config) {
         return (((exchange, chain) -> {
             if(routeValidator.isSecured.test(exchange.getRequest())) {
                 if(!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {

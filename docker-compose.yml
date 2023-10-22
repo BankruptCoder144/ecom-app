@@ -1,0 +1,58 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ecomapp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - 5431:5432
+    networks: 
+      - backendNetwork
+  ecom-service-registry:
+    image: ecom-service-registry
+    ports:
+      - 8761:8761
+    networks: 
+      - backendNetwork
+  api-gateway-service:
+    image: api-gateway-service
+    ports:
+      - 9001:9001
+    networks: 
+      - backendNetwork
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+  user-service:
+    image: user-service
+    ports:
+      - 9003:9003
+    networks: 
+      - backendNetwork
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+  product-service:
+    image: product-service
+    ports:
+      - 9004:9004
+    networks: 
+      - backendNetwork
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+  order-service:
+    image: order-service
+    ports:
+      - 9005:9005
+    networks: 
+      - backendNetwork
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+
+
+networks:
+  backendNetwork:
+    name: backend-network
+
+    

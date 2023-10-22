@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 @Component
 public class UserAuthenticationFilter extends AbstractGatewayFilterFactory<UserAuthenticationFilter.Config> {
@@ -25,7 +27,7 @@ public class UserAuthenticationFilter extends AbstractGatewayFilterFactory<UserA
                 String authToken = tokenUtil.extractAuthToken(
                         exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0));
                 if(!tokenUtil.validateTokenForRole(authToken, "USER")) {
-                    throw new RuntimeException("Only User can access this action");
+                    return Mono.error(new RuntimeException("Only user can perform this action1"));
                 }
             }
             return chain.filter(exchange);

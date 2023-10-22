@@ -1,6 +1,16 @@
 server:
   port: 9001
 
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+  instance:
+    name: localhost
+
 spring:
   application:
     name: api-gateway
@@ -26,12 +36,4 @@ spring:
 #              args:
 #                name: productCircuitBreaker
 #                fallbackUri: forward:/defaultFallback
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      default-zone: http://localhost:8761/eureka/
-  instance:
-    hostname: localhost
 

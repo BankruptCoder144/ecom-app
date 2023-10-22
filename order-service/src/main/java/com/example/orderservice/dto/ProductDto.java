@@ -8,7 +8,6 @@ import java.util.List;
 @Data
 public class ProductDto {
 
-    @JsonIgnore
     private int id;
     private String name;
     private List<Integer> categoryIds;
