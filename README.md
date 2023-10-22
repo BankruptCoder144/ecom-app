@@ -44,3 +44,23 @@ If you want to deploy more than one instance for any microservice, update the `d
       - SPRING_PROFILES_ACTIVE=prod
 ```
 This will create a new user service instance which will itself register to service registry microservice and eureka will auto load balance the requests between 2 instances of user-service
+
+## Local Testing
+For local testing you can use mvn commands to build and deploy each microservice seperately. Running through the local will use default properties file. Make sure you have a postgres server running on your local and is configured the the application properties file for each microservice
+
+## APIs
+### User APIs :
+* `POST /user/register` : To register a new user with `user` role
+* `POST /user/admin/register` : To register a new user with `admin` role
+* `POST /user/token`: to generate a token for a registered user
+* `GET /user/data` : to check the data store in the JWT token (For debugging purpose)
+* `GET /user/validate` : to check if a token is valid
+
+### Product APIs :
+* `POST /product/category` : to create a new product category
+* `GET /product/category` : get all categories
+* `POST /product/` : create a new product
+* `PUT /product/{pid}` : Update product details or create if product doesn't exist
+* `PUT /product/order` : THis API is meant to be used during ordering flow to check the inventory and update the invetory for each order
+* `GET /product/` : Get all products
+* `GET /product/{pid}` : get details of a specific product
