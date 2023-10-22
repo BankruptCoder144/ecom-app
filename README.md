@@ -64,3 +64,13 @@ For local testing you can use mvn commands to build and deploy each microservice
 * `PUT /product/order` : THis API is meant to be used during ordering flow to check the inventory and update the invetory for each order
 * `GET /product/` : Get all products
 * `GET /product/{pid}` : get details of a specific product
+
+### Order APIs (These APIs require a Auth token with `user` role) :
+* `POST /order/` : To create a new order
+* `GET /order/` : Get all orders
+* `GET/order/{id}` :  Get order details for a specific order
+
+## TODO Checklist :
+* Add pending unit tests
+* Rate limiting
+* Add caching for product apis
