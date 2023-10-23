@@ -15,7 +15,7 @@ This project has currently 5 folders, each folder corresponds to a Microservice,
 
 ## Deployement
 ### Deploying in Containarized Environment
-All the microservices are spring based that are built using maven, you can build, test and package each microservice independently using mvn build commands. For easy build and packaging, I have created a bash script. This script will Clean build, package and create docker images for each microservice
+All the microservices are spring based that are built using maven, you can build, test and package each microservice independently using mvn build commands. For easy build, I have created a bash script. This script will Clean build, package and create docker images for each microservice
 Make sure you are at root folder for executing these scripts.
 ```
 bash ./buildImages.sh
@@ -74,3 +74,4 @@ For local testing you can use mvn commands to build and deploy each microservice
 * Add pending unit tests
 * Rate limiting
 * Add caching for product apis
+* Add a frontend and hide the backend in a private network
