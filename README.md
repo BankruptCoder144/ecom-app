@@ -3,7 +3,7 @@ This is a Microservice based Ecom application to demostrate the different techno
 
 ## Pre-Requisites
 * Docker
-* JDP 17
+* JDK 17
 
 ## Understanding folder structure
 This project has currently 5 folders, each folder corresponds to a Microservice, so the Service include 5 Microservices as :
